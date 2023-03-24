@@ -62,6 +62,27 @@ public class SegurancaServiceTest {
     }
 
     @Test
+    public void novoUsuarioTestNOkNomeEmpty() {
+        assertThrows(IllegalArgumentException.class, () -> {
+                service.novoUsuario("", "Senha");
+            });
+    }
+
+    @Test
+    public void novoUsuarioTestNOkSenhaNull() {
+        assertThrows(IllegalArgumentException.class, () -> {
+                service.novoUsuario("Teste", null);
+            });
+    }
+
+    @Test
+    public void novoUsuarioTestNOkSenhaEmpty() {
+        assertThrows(IllegalArgumentException.class, () -> {
+                service.novoUsuario("Teste", "");
+            });
+    }
+
+    @Test
     public void novoUsuarioTestOk() {
         assertDoesNotThrow(() -> {
                 service.novoUsuario("Teste", "Senha");
