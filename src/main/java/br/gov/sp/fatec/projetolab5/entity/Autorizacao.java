@@ -35,5 +35,9 @@ public class Autorizacao {
         this.nome = nome;
     }
 
+    public Object thenReturn(String statusAutorizacao) {
+        return null;
+    }
+
 
 }

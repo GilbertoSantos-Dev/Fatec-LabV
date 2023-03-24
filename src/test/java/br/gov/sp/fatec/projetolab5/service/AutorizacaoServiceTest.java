@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
@@ -18,11 +20,14 @@ public class AutorizacaoServiceTest {
     @MockBean
     private AutorizacaoRepository autorizacaoRepo;
 
+    @BeforeEach
+    public void setUp() {
+        Mockito.when(autorizacaoRepo.getByNome("admin")).thenReturn("autorizado");
+    }
+
     @Test
-    public void buscarAutorizacaoPeloNomeTestNOk() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            autorizacao.buscarPeloNome(null);
-    });
+    public void buscarAutorizacaoPeloNomeTestOk() {
+        assertEquals("autorizado", autorizacao.buscarPeloNome("admin"));
     }
 
 }
